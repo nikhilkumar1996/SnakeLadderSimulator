@@ -8,14 +8,14 @@ namespace SnakeLadder
 {
     public class SnakeAndLadderGame
     {
-        const int NoPlay = 0, Ladder = 1, Snake = 2, WinningPosition=100;
-        int playerPosition = 0, count; 
+        const int NoPlay = 0, Ladder = 1, Snake = 2, WinningPosition = 100;
+        int playerPosition = 0, count=0;
         Random random = new Random();
         public int DiceRoll()
         {
             count++;
             return random.Next(1, 7);
-            
+
         }
         public void Play()
         {
@@ -53,11 +53,11 @@ namespace SnakeLadder
 
 
                 }
-                Console.WriteLine("PlayerPosition="+this.playerPosition);
-            
+                Console.WriteLine("PlayerPosition=" + this.playerPosition);
+
             }
-            Console.WriteLine("Count of Dice Rolled="+count);
-        } 
-        
+            Console.WriteLine("Count of Dice Rolled=" +count);
+        }
+
     }
 }
