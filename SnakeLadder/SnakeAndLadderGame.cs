@@ -28,15 +28,30 @@ namespace SnakeLadder
                         break;
 
                     case Ladder:
-                        this.playerPosition += DiceRoll();
-                        Console.WriteLine(this.playerPosition);
+                        if (this.playerPosition + DiceRoll() <= 100)
+                        {
+                            this.playerPosition += DiceRoll();
+                            Console.WriteLine(this.playerPosition);
+                        }
+                        else
+                        {
+                            continue;
+                        }
                         break;
 
                     case Snake:
-                        this.playerPosition = playerPosition - DiceRoll();
-                        Console.WriteLine(this.playerPosition);
-                        break;
+                        if (this.playerPosition - DiceRoll() >= 0)
+                        {
+                            this.playerPosition = playerPosition - DiceRoll();
+                            Console.WriteLine(this.playerPosition);
+                        }
+                      
+                        else
+                        {
+                            continue;
+                        }
 
+                        break;
                 }
             }
         } 
