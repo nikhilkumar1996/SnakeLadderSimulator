@@ -8,16 +8,18 @@ namespace SnakeLadder
 {
     public class SnakeAndLadderGame
     {
-        const int NoPlay = 0, Ladder = 1, Snake = 2, WinningPosition=100;
+        const int NoPlay = 0, Ladder = 1, Snake = 2, WinningPosition = 100;
         int playerPosition = 0;
         Random random = new Random();
         public int DiceRoll()
         {
+
             return random.Next(1, 7);
+
         }
         public void Play()
         {
-            for (int i = 1; i < WinningPosition;i++)
+            while (this.playerPosition < WinningPosition)
             {
 
                 int roll = random.Next(0, 3);
@@ -31,11 +33,7 @@ namespace SnakeLadder
                         if (this.playerPosition + DiceRoll() <= 100)
                         {
                             this.playerPosition += DiceRoll();
-                            Console.WriteLine(this.playerPosition);
-                        }
-                        else
-                        {
-                            continue;
+
                         }
                         break;
 
@@ -43,18 +41,23 @@ namespace SnakeLadder
                         if (this.playerPosition - DiceRoll() >= 0)
                         {
                             this.playerPosition = playerPosition - DiceRoll();
-                            Console.WriteLine(this.playerPosition);
+
                         }
-                      
+
                         else
                         {
-                            continue;
+                            this.playerPosition = 0;
                         }
 
                         break;
+
+
                 }
+
+
             }
-        } 
-        
+
+        }
+
     }
 }
