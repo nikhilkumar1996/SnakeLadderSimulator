@@ -77,7 +77,7 @@ namespace SnakeLadder
                 Console.WriteLine("PlayerPosition=" + this.playerPosition);
 
             }
-            Console.WriteLine("Count of Dice Rolled=" + count);
+            
             
             return this.playerPosition;
             
