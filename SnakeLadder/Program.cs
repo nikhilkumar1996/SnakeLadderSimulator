@@ -1,5 +1,6 @@
 ﻿using System;
-namespace SnakeLadder {
+namespace SnakeLadder
+{
 
     public class Program
     {
@@ -7,33 +8,16 @@ namespace SnakeLadder {
         public static void Main()
         {
 
-            Console.WriteLine("Welcome to Snake Ladder Program");
+            Console.WriteLine("Welcome to SnakeLadder Program");
 
             SnakeAndLadderGame SnakeAndLadder = new SnakeAndLadderGame();
-            
-
-            int [] players =new int[2] { 1, 2};
-            
-            
-                foreach (int items in players)
-                {
-                    
-                    int PLAYER = SnakeAndLadder.Play(items);
-                    
+            SnakeAndLadder.Play(0, 0);
 
 
 
-                    if ( PLAYER==100)
-                    {
-                        Console.WriteLine( "Player {0} wins",items);
-                    }
-                    return;
-                    
 
 
 
-                }
-
-            }
         }
     }
+}
