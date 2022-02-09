@@ -8,8 +8,8 @@ namespace SnakeLadder
 {
     public class SnakeAndLadderGame
     {
-        const int NoPlay = 0, Ladder = 1, Snake = 2, WinningPosition = 100;
-        int playerPosition = 0, count = 0;
+        const int NoPlay = 0, Ladder = 1, Snake = 2, Winner = 3, WinningPosition = 100;
+        int playerChange = 1, count = 0; //playerChange=1(PLAYER 1) && playerChnage=2(PLAYER 2)
         Random random = new Random();
         public int DiceRoll()
         {
@@ -17,70 +17,127 @@ namespace SnakeLadder
             return random.Next(1, 7);
 
         }
-        public int Play(int player)
+        public void Play(int playerPosition1,int playerPosition2)
         {
-            while (this.playerPosition <= WinningPosition)
+            Console.WriteLine("PLAYER:" + this.playerChange + "is playing \n");
+            bool flag = true;
+            while (playerPosition1 <= WinningPosition || playerPosition2 <= WinningPosition && flag)
             {
 
-                int roll = random.Next(0, 3);
-                switch (roll)
+                int roll = random.Next(0, 4);
+                if (playerChange == 1)
                 {
-                    case NoPlay:
-                        {
-                            Console.WriteLine("Player hasn't rolled the dice");
+                    switch (roll)
+                    {
+                        case NoPlay:
+                            Console.WriteLine("Player{0} hasn't rolled the dice", playerChange);
+                            playerChange =2;
 
-                            return 0;
-                        }
-                        
-                        
-                       
-                        
+                            continue;
 
-                    case Ladder:
-                        if (this.playerPosition + DiceRoll() < 100)
-                        {
-                            this.playerPosition += DiceRoll();
+                        case Ladder:
+                            if (playerPosition1 + DiceRoll() < 100 && playerChange==1)
+                            {
+                                playerPosition1 += DiceRoll();
 
-                            this.playerPosition += DiceRoll();
-                            return this.playerPosition;
 
-                        }
-                        if (this.playerPosition + DiceRoll() == 100)
-                        {
-                            Console.WriteLine("Winner",this.playerPosition);
-                            return 100;
-                        }
-                         
-                        
-                        break;
 
-                    case Snake:
-                        if (this.playerPosition - DiceRoll() > 0)
-                        {
-                            this.playerPosition = playerPosition - DiceRoll();
-                            return this.playerPosition;
 
-                        }
+                            }
+                            break;
 
-                        else
-                        {
-                            this.playerPosition = 0;
-                            return this.playerPosition;
-                        }
+                        case Snake:
+                            if (playerPosition1 - DiceRoll() > 0 && playerChange==1)
+                            {
+                                playerPosition1 = playerPosition1 - DiceRoll();
+                                playerChange = 2;
 
-                        
-                  
-                    
+                            }
+                            else
+                            {
+                                playerPosition1 = 0;
+                            }
+                            break;
+
+                        case Winner:
+                            if (playerPosition1 + DiceRoll() == 100 && playerChange==1)
+                            {
+
+                                playerPosition1 += DiceRoll();
+                                flag = false;
+                            }
+                            break;
+                    }
+                    Console.WriteLine("Player 1 current position : " +playerPosition1);
 
 
                 }
-                Console.WriteLine("PlayerPosition=" + this.playerPosition);
+               
 
+
+                if (playerChange == 2)
+                {
+                    switch (roll)
+                    {
+                        case NoPlay:
+                            Console.WriteLine("Player{0} hasn't rolled the dice",playerChange);
+                            playerChange = 1;
+
+                            continue;
+
+                        case Ladder:
+                            if (playerPosition2 + DiceRoll() < 100 && playerChange==2)
+                            {
+                                playerPosition2 += DiceRoll();
+
+
+
+                            }
+                            break;
+
+                        case Snake:
+                            if (playerPosition2 - DiceRoll() > 0 && playerChange==2)
+                            {
+                                playerPosition2 = playerPosition2 - DiceRoll();
+                                playerChange = 1;
+
+                            }
+                            else
+                            {
+                                playerPosition2 = 0;
+                            }
+                            break;
+
+                        case Winner:
+                            if (playerPosition2 + DiceRoll() == 100 && playerChange==2)
+                            {
+
+                                playerPosition2 += DiceRoll();
+                                flag = false;
+                            }
+                            break;
+                    }
+                    Console.WriteLine("Player 2 current position : " +playerPosition2);
+                }
+                
             }
             
-            
-            return this.playerPosition;
-            
+            //Print winner 
+            if (playerPosition1 == WinningPosition)
+            {
+                Console.WriteLine("Winner is player 1  :" + playerPosition1);
+                Console.WriteLine("Final position of player 2  :" + playerPosition2);
+            }
+            else
+            {
+                Console.WriteLine("Winner is player 2  :" + playerPosition2);
+                Console.WriteLine("Final position of player 1  :" + playerPosition1);
+            }
+            //Total Number of game played
+            Console.WriteLine("Number of times game played :" +this.count);
+
+
+
         }
 
     }
